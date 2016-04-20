@@ -27,7 +27,7 @@ if [ "$1" = "build" ]; then
   rm -rf $WILDFLY_PATH/standalone/configuration/standalone_xml_history
 
   VERSION=${3:-1.0.0}
-  DOCKER_TAG="dmadk/niord-appsvr:$VERSION"
+  DOCKER_TAG="dmadk/niord-appsrv:$VERSION"
   echo "**********************************************"
   echo "** Building $DOCKER_TAG         **"
   echo "**********************************************"
@@ -39,7 +39,7 @@ if [ "$1" = "build" ]; then
 
 elif [ "$1" = "push" ]; then  
   VERSION=${2:-1.0.0}
-  DOCKER_TAG="dmadk/niord-appsvr:$VERSION"
+  DOCKER_TAG="dmadk/niord-appsrv:$VERSION"
   echo "Pushing $DOCKER_TAG to docker.io - make sure you are logged in"
   docker push $DOCKER_TAG
   exit     

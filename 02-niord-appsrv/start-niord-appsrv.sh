@@ -3,7 +3,7 @@
 NIORD_HOME=${NIORD_HOME:-~/.niord}
 
 VERSION=${1:-1.0.0}
-DOCKER_TAG="dmadk/niord-appsvr:$VERSION"
+DOCKER_TAG="dmadk/niord-appsrv:$VERSION"
 
 echo "Running $DOCKER_TAG application server with niord.home=$NIORD_HOME"
 
