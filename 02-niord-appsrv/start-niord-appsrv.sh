@@ -14,6 +14,7 @@ docker run \
   -p 8080:8080 \
   --link niord-mysql:niorddb \
   --link niordkc-mysql:kcdb \
+  --link niord-smtp:niordsmtp \
   --link msi-mysql:msidb \
   -e NIORD_HOME=/opt/niord \
   -v $NIORD_HOME:/opt/niord \
