@@ -5,24 +5,22 @@ if [ "$1" = "build" ]; then
   rm -rf niord-appsrv
 
   echo "**********************************************"
-  echo "** Building Niord appsrv                    **"
+  echo "** Building Niord Keycloak                  **"
   echo "**********************************************"
-
-  if [ ! -f "$2" ]; then
-    echo "Web application $2 does not exist."
-    exit
-  fi
 
   # Build a fully configured Wildfly
   git clone https://github.com/NiordOrg/niord-appsrv.git
-  source niord-appsrv/02-wildfly/wildfly-env.sh
-  ./niord-appsrv/02-wildfly/install-wildfly.sh
-  cp "$2" $WILDFLY_PATH/standalone/deployments/
+  source niord-appsrv/03-keycloak/keycloak-env.sh
+  ./niord-appsrv/03-keycloak/install-keycloak-server.sh
 
-  rm -rf $WILDFLY_PATH/standalone/configuration/standalone_xml_history
+  ADM_USER=${ADM_USER:-admin}
+  ADM_PWD=${ADM_PWD:-keycloak}
+  $KEYCLOAK_PATH/bin/add-user-keycloak.sh -r master -u "$ADM_USER" -p "$ADM_PWD"
 
-  VERSION=${3:-1.0.1}
-  DOCKER_TAG="dmadk/niord-appsrv:$VERSION"
+  rm -rf $KEYCLOAK_PATH/standalone/configuration/standalone_xml_history
+
+  VERSION=${2:-1.0.1}
+  DOCKER_TAG="dmadk/niord-keycloak:$VERSION"
   echo "**********************************************"
   echo "** Building $DOCKER_TAG         **"
   echo "**********************************************"
@@ -34,7 +32,7 @@ if [ "$1" = "build" ]; then
 
 elif [ "$1" = "push" ]; then  
   VERSION=${2:-1.0.1}
-  DOCKER_TAG="dmadk/niord-appsrv:$VERSION"
+  DOCKER_TAG="dmadk/niord-keycloak:$VERSION"
   echo "Pushing $DOCKER_TAG to docker.io - make sure you are logged in"
   docker push $DOCKER_TAG
   exit     
@@ -45,7 +43,7 @@ else
     echo Valid targets are:
 fi
 
-echo "  build <war> <version>   Builds the specified version including the specified war"
-echo "  push  <version>         Pushes version to docker.io"
+echo "  build <version>   Builds the specified version"
+echo "  push  <version>   Pushes version to docker.io"
 
 

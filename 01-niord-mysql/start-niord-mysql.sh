@@ -2,8 +2,8 @@
 
 NIORD_HOME=${NIORD_HOME:-~/.niord}
 
-VERSION=${1:-1.0.0}
-DOCKER_TAG="dmadk/niord-mysql:$VERSION"
+VERSION=${1:-latest}
+DOCKER_TAG="mysql:$VERSION"
 
 echo "Running $DOCKER_TAG Niord database with data in $NIORD_HOME/mysql/niord"
 

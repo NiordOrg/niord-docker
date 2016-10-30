@@ -2,7 +2,7 @@
 
 NIORD_HOME=${NIORD_HOME:-~/.niord}
 
-VERSION=${1:-1.0.0}
+VERSION=${1:-1.0.1}
 DOCKER_TAG="dmadk/niord-appsrv:$VERSION"
 
 echo "Running $DOCKER_TAG application server with niord.home=$NIORD_HOME"
@@ -13,7 +13,6 @@ docker run \
   --name niord-appsrv \
   -p 8080:8080 \
   --link niord-mysql:niorddb \
-  --link niordkc-mysql:kcdb \
   --link niord-smtp:niordsmtp \
   --link msi-mysql:msidb \
   -e NIORD_HOME=/opt/niord \
