@@ -13,6 +13,7 @@ full () {
     echo "Pulling latest images"
     docker pull dmadk/niord-appsrv:$NIORD_APPSRV_VERSION
     docker pull dmadk/niord-keycloak:$NIORD_KEYCLOAK_VERSION
+    docker pull dmadk/niord-httpd:$NIORD_HTTPD_VERSION
     docker pull mysql:$MYSQL_VERSION
 
     #create the containers and link them
