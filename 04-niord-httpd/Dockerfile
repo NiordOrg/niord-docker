@@ -2,6 +2,7 @@ FROM httpd:2.4
 
 ENV APPSRV_NAME localhost
 ENV KEYCLOAK_NAME localhost
+ENV PROXY_NAME localhost
 
 # Add Niord-specific configuraiton
 ADD niord.conf /usr/local/apache2/conf/
