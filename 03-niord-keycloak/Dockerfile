@@ -13,7 +13,7 @@ ENV LAUNCH_JBOSS_IN_BACKGROUND true
 
 RUN yum install -y epel-release && yum install -y jq && yum clean all
 
-ADD https://raw.githubusercontent.com/NiordOrg/niord-appsrv/master/03-keycloak/niord-dev-realm.json /opt/jboss/keycloak/import-realm.json
+ADD https://raw.githubusercontent.com/NiordOrg/niord-appsrv/master/03-keycloak/niord-bootstrap-realm.json /opt/jboss/keycloak/import-realm.json
 
 # Expose the ports we're interested in
 EXPOSE 8080
