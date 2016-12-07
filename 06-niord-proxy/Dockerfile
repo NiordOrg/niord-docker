@@ -5,6 +5,7 @@ ADD niord-proxy-swarm.jar /opt/niord-proxy-swarm.jar
 ENV EXECUTION_MODE development
 ENV NIORD_PROXY_SERVER https://niord.e-navigation.net
 ENV NIORD_REPO_PATH ""
+ENV NIORD_PROXY_TRACKING_ID ""
 
 # TODO: Resolve logging in wildfly swarm
 # See https://groups.google.com/forum/#!topic/wildfly-swarm/nQCHhWSaEuY
@@ -15,4 +16,5 @@ ENTRYPOINT java \
    -Dniord-proxy.server=$NIORD_PROXY_SERVER \
    -Dniord-proxy.repoRootPath=$NIORD_REPO_PATH \
    -Dniord-proxy.mode=$EXECUTION_MODE \
+   -Dniord-proxy.analyticsTrackingId=$NIORD_PROXY_TRACKING_ID \
    -jar /opt/niord-proxy-swarm.jar
