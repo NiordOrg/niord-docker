@@ -13,10 +13,6 @@ if [ "$1" = "build" ]; then
   source niord-appsrv/03-keycloak/keycloak-env.sh
   ./niord-appsrv/03-keycloak/install-keycloak-server.sh
 
-  ADM_USER=${ADM_USER:-admin}
-  ADM_PWD=${ADM_PWD:-keycloak}
-  $KEYCLOAK_PATH/bin/add-user-keycloak.sh -r master -u "$ADM_USER" -p "$ADM_PWD"
-
   rm -rf $KEYCLOAK_PATH/standalone/configuration/standalone_xml_history
 
   VERSION=${2:-1.0.1}
