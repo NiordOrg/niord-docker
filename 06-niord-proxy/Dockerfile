@@ -7,6 +7,7 @@ ENV NIORD_PROXY_SERVER https://niord.e-navigation.net
 ENV NIORD_REPO_PATH ""
 ENV NIORD_REPO_TYPE ""
 ENV NIORD_PROXY_TRACKING_ID ""
+ENV NIORD_PROXY_WMS_URL ""
 
 # TODO: Resolve logging in wildfly swarm
 # See https://groups.google.com/forum/#!topic/wildfly-swarm/nQCHhWSaEuY
@@ -19,4 +20,5 @@ ENTRYPOINT java \
    -Dniord-proxy.repoRootType=$NIORD_REPO_TYPE \
    -Dniord-proxy.mode=$EXECUTION_MODE \
    -Dniord-proxy.analyticsTrackingId=$NIORD_PROXY_TRACKING_ID \
+   -Dniord-proxy.wmsServerUrl=$NIORD_PROXY_WMS_URL \
    -jar /opt/niord-proxy-swarm.jar
