@@ -3,7 +3,7 @@ FROM jboss/base-jdk:8
 USER root
 
 # Set the KEYCLOAK_VERSION env variable
-ENV KEYCLOAK_VERSION 2.4.0.Final
+ENV KEYCLOAK_VERSION 2.5.0.Final
 ENV JBOSS_HOME /opt/jboss/keycloak
 
 ADD niord-appsrv/keycloak-$KEYCLOAK_VERSION /opt/jboss/keycloak
