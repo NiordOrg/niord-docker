@@ -16,6 +16,7 @@ ENV NIORD_PROXY_WMS_URL ""
 EXPOSE 8080
 ENTRYPOINT java \
    -Djboss.server.log.dir=/var/log \
+   -Djava.net.preferIPv4Stack=true \
    -Dniord-proxy.server=$NIORD_PROXY_SERVER \
    -Dniord-proxy.areas=$NIORD_PROXY_AREAS \
    -Dniord-proxy.repoRootPath=$NIORD_REPO_PATH \
