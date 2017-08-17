@@ -1,0 +1,3 @@
+22 * * * * /hourly-backup.sh >> /var/log/cron.log 2>&1
+25 06 * * * /daily-backup.sh >> /var/log/cron.log 2>&1
+
