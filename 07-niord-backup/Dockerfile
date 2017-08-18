@@ -11,12 +11,20 @@ ADD crontab /etc/cron.d/backup-cron
 
 ADD run-cron.sh /run-cron.sh
 
-# Add the backup script run by the cron job
+# Add the backup scripts run by the cron job
 ADD hourly-backup.sh /hourly-backup.sh
+ADD daily-backup.sh /daily-backup.sh
+
+# Add restore scripts
+ADD restore-appsrv-backup.sh /restore-appsrv-backup.sh
+ADD restore-keycloak-backup.sh /restore-keycloak-backup.sh
 
 # Give execution rights on the cron job
 RUN chmod 0644 /etc/cron.d/backup-cron
 RUN chmod +x /hourly-backup.sh
+RUN chmod +x /daily-backup.sh
+RUN chmod +x /restore-appsrv-backup.sh
+RUN chmod +x /restore-keycloak-backup.sh
 RUN chmod +x /run-cron.sh
 
 RUN /usr/bin/crontab /etc/cron.d/backup-cron
