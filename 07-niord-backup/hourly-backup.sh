@@ -15,8 +15,8 @@ mkdir -p $BACKUP_DIR
 mysqldump -h niord-mysql -P 3306 -u niord --password=${NIORD_DB_PASSWORD} niord | gzip > ${NIORD_FILE}
 mysqldump -h niordkc-mysql -P 3306 -u niordkc --password=${NIORDKC_DB_PASSWORD} niordkc | gzip > ${NIORDKC_FILE}
 
-# Delete files older than 7 days from the backup folder
-find ${BACKUP_DIR}/ -mtime +7 -exec rm {} \;
+# Delete files older than 3 days from the backup folder
+find ${BACKUP_DIR}/ -mtime +3 -exec rm {} \;
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 echo "$(date): Hourly back-up of niord DB in $ELAPSED_TIME seconds"
