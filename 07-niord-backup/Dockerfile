@@ -29,6 +29,10 @@ RUN chmod +x /run-cron.sh
 
 RUN /usr/bin/crontab /etc/cron.d/backup-cron
 
+# Prevent security issue on RHEL
+# https://stackoverflow.com/questions/21926465/issues-running-cron-in-docker-on-different-hosts
+RUN sed -i '/session    required     pam_loginuid.so/c\#session required pam_loginuid.so' /etc/pam.d/cron
+
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log
 
