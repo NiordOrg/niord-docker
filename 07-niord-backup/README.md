@@ -3,6 +3,9 @@
 A very Niord-specific docker container that will create hourly and daily database backups of the 
 mysql databases for the niord app and Keycloak server.
 
+The actual cron jobs must be set up on the host, as it caused too many problems getting
+cron to run in the container on RHEL.
+
 Example:
 
     docker run \
@@ -14,6 +17,12 @@ Example:
       -e NIORD_HOME=/opt/niord \
       -v $NIORD_HOME:/opt/niord \
       -d dmadk/niord-backup:1.0.0
+
+Use "sudo crontab -e" to configure the two cronjobs:
+
+    22 * * * * /usr/bin/docker exec niord-backup /hourly-backup.sh >> $NIORD_HOME/backup/backup.log 2>&1
+    20 07 * * * /usr/bin/docker exec niord-backup /daily-backup.sh >> $NIORD_HOME/backup/backup.log 2>&1
+
 
 The database backup files will be placed under $NIORD_HOME/backup. 
 Hourly backup files are automatically deleted after 3 days and daily backup file after 30 days.

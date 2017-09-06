@@ -1,18 +1,9 @@
 FROM centos:latest
 
-# Credits: Mostly copied and modified from https://www.ekito.fr/people/run-a-cron-job-with-docker/
-# Credits: https://hub.docker.com/r/yosugi/cron-centos/~/dockerfile/
-
 RUN yum -y update && \
-    yum -y install crontabs && \
     yum -y install mysql
 
-# Add crontab file in the cron directory
-ADD crontab /etc/cron.d/backup-cron
-
-ADD run-cron.sh /run-cron.sh
-
-# Add the backup scripts run by the cron job
+# Add the backup scripts run by the containers cron jobs
 ADD hourly-backup.sh /hourly-backup.sh
 ADD daily-backup.sh /daily-backup.sh
 
@@ -21,19 +12,10 @@ ADD restore-appsrv-backup.sh /restore-appsrv-backup.sh
 ADD restore-keycloak-backup.sh /restore-keycloak-backup.sh
 
 # Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/backup-cron
 RUN chmod +x /hourly-backup.sh
 RUN chmod +x /daily-backup.sh
 RUN chmod +x /restore-appsrv-backup.sh
 RUN chmod +x /restore-keycloak-backup.sh
-RUN chmod +x /run-cron.sh
 
-RUN /usr/bin/crontab /etc/cron.d/backup-cron
 
-# comment out PAM
-RUN sed -i -e '/pam_loginuid.so/s/^/#/' /etc/pam.d/crond
-
-# Create the log file to be able to run tail
-RUN touch /var/log/cron.log
-
-CMD ["/run-cron.sh"]
+CMD mkdir -p /opt/niord/backup && touch /opt/niord/backup/backup.log && tail -f /opt/niord/backup/backup.log
