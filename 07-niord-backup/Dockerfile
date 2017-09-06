@@ -1,10 +1,11 @@
-FROM ubuntu:latest
+FROM centos:latest
 
 # Credits: Mostly copied and modified from https://www.ekito.fr/people/run-a-cron-job-with-docker/
+# Credits: https://hub.docker.com/r/yosugi/cron-centos/~/dockerfile/
 
-RUN apt-get update -q && \
-    apt-get install -qy cron mysql-client && \
-    apt-get clean -q
+RUN yum -y update && \
+    yum -y install crontabs && \
+    yum -y install mysql
 
 # Add crontab file in the cron directory
 ADD crontab /etc/cron.d/backup-cron
@@ -29,9 +30,8 @@ RUN chmod +x /run-cron.sh
 
 RUN /usr/bin/crontab /etc/cron.d/backup-cron
 
-# Prevent security issue on RHEL
-# https://stackoverflow.com/questions/21926465/issues-running-cron-in-docker-on-different-hosts
-RUN sed -i '/session    required     pam_loginuid.so/c\#session required pam_loginuid.so' /etc/pam.d/cron
+# comment out PAM
+RUN sed -i -e '/pam_loginuid.so/s/^/#/' /etc/pam.d/crond
 
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log

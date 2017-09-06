@@ -6,6 +6,4 @@
 printenv | grep "DB_PASSWORD" >> /etc/environment
 
 # Run cron deamon
-# -m off : sending mail is off
-# tail makes the output to cron.log viewable with the $(docker logs container_id) command
-cron  && tail -f /var/log/cron.log
+crond  && tail -f /var/log/cron.log
