@@ -6,7 +6,7 @@ if [ "$1" = "build" ]; then
   echo "** Building Niord HTTPD                     **"
   echo "**********************************************"
 
-  VERSION=${2:-1.0.0}
+  VERSION=${2:-s124}
   DOCKER_TAG="dmadk/niord-httpd:$VERSION"
   echo "**********************************************"
   echo "** Building $DOCKER_TAG         **"
@@ -17,7 +17,7 @@ if [ "$1" = "build" ]; then
 
 
 elif [ "$1" = "push" ]; then  
-  VERSION=${2:-1.0.0}
+  VERSION=${2:-s124}
   DOCKER_TAG="dmadk/niord-httpd:$VERSION"
   echo "Pushing $DOCKER_TAG to docker.io - make sure you are logged in"
   docker push $DOCKER_TAG
