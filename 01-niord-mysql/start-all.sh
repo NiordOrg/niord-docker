@@ -4,7 +4,7 @@ pushd `dirname ${BASH_SOURCE}` > /dev/null
 export MYSQL_DOCKER_DIR=`pwd`
 popd > /dev/null
 
-VERSION=${1:-latest}
+VERSION=${1:-5.7.28}
 NIORD_HOME=${NIORD_HOME:-~/.niord}
 export NIORD_HOME
 
